@@ -8,8 +8,13 @@
 /* Base page styles */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f1f1f1;
+  background-color: #ffffff;
   padding: 20px;
+}
+
+/* Set Helvetica as the default font for the whole page */
+body, input, button, h1, h2, h3, p, .modal, .modal-close, .gallery-item, .placeholder {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 /* Centered container */
@@ -92,28 +97,30 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  padding: 20px;
   justify-content: center;
 }
 
-/* Gallery items */
+/* Gallery items: three columns by default */
 .gallery-item {
-  flex: 1 1 100%;  /* full width by default */
+  flex: 0 1 31%;
   min-width: 280px;
   max-width: 500px;
-  background: white;
+  background: rgba(228, 0, 43, 0.3);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-/* Three columns on wider screens */
-@media (min-width: 1000px) {
+/* One column on small screens */
+@media (max-width: 999px) {
   .gallery-item {
-    flex: 0 1 31%;
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
 
@@ -122,6 +129,18 @@ button:hover {
   height: 200px;
   object-fit: cover;
   border-radius: 4px;
+}
+
+/* Add a smooth scaling effect on gallery images */
+.apod-image img,
+.gallery-item img {
+  transition: transform 0.3s ease;
+}
+
+.apod-image img:hover,
+.gallery-item img:hover {
+  transform: scale(1.06);
+  z-index: 2;
 }
 
 .gallery-item p {
@@ -141,4 +160,81 @@ button:hover {
 .placeholder-icon {
   font-size: 48px;
   margin-bottom: 20px;
+}
+
+/* Modal background */
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 30, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Modal window */
+.modal {
+  background: #5d8cf2;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90vw;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  position: relative;
+  text-align: center;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;         /* Move closer to the top */
+  right: 0.5rem;       /* Move closer to the right */
+  background: #fff;
+  color: #181f2a;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  width: 2.2rem;       /* Slightly larger for better centering */
+  height: 2.2rem;
+  cursor: pointer;
+  display: flex;       /* Center the X inside the circle */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-date {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.modal-explanation {
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: left;
+  color: #cfd8dc;
+}
+
+/* Space fact box */
+.space-fact {
+  background: rgba(0, 50, 160, 0.3); 
+  color: #0032a0;
+  border-radius: 8px;
+  padding: 16px 20px;
+  margin: 20px 20px 0 20px;
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: Helvetica, Arial, sans-serif;
 }
